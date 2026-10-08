@@ -1,0 +1,179 @@
+```javascript
+/* =====================================================
+   WEBSITE CLB KỸ NĂNG NGUYỄN THÁI BÌNH
+   File: script.js
+===================================================== */
+
+
+/* =====================================================
+   1. HIỆU ỨNG COUNTER
+===================================================== */
+
+const counters = document.querySelectorAll(".counter");
+
+
+const startCounter = (counter) => {
+
+    const target =
+        Number(counter.dataset.target);
+
+    let current = 0;
+
+    const increment =
+        Math.max(1, Math.ceil(target / 80));
+
+
+    const updateCounter = () => {
+
+        current += increment;
+
+        if (current >= target) {
+
+            counter.textContent = target;
+
+            return;
+
+        }
+
+        counter.textContent = current;
+
+        requestAnimationFrame(updateCounter);
+
+    };
+
+
+    updateCounter();
+
+};
+
+
+
+/* =====================================================
+   2. KÍCH HOẠT COUNTER KHI CUỘN TỚI
+===================================================== */
+
+const statsSection =
+    document.querySelector(".stats");
+
+
+let counterStarted = false;
+
+
+const observer =
+    new IntersectionObserver(
+
+        (entries) => {
+
+            entries.forEach((entry) => {
+
+                if (
+                    entry.isIntersecting &&
+                    !counterStarted
+                ) {
+
+                    counters.forEach(startCounter);
+
+                    counterStarted = true;
+
+                }
+
+            });
+
+        },
+
+        {
+            threshold: 0.3
+        }
+
+    );
+
+
+if (statsSection) {
+
+    observer.observe(statsSection);
+
+}
+
+
+
+/* =====================================================
+   3. FORM LIÊN HỆ
+===================================================== */
+
+const contactForm =
+    document.getElementById("contactForm");
+
+
+if (contactForm) {
+
+    contactForm.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            const name =
+                document.getElementById("name").value;
+
+
+            alert(
+                `Cảm ơn ${name} đã liên hệ với CLB!`
+            );
+
+
+            contactForm.reset();
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   4. HIỆU ỨNG FADE-IN KHI CUỘN
+===================================================== */
+
+const animatedElements =
+    document.querySelectorAll(
+        ".card, .member, .event, .about-content"
+    );
+
+
+const animationObserver =
+    new IntersectionObserver(
+
+        (entries) => {
+
+            entries.forEach((entry) => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add(
+                        "fade-in"
+                    );
+
+                    animationObserver.unobserve(
+                        entry.target
+                    );
+
+                }
+
+            });
+
+        },
+
+        {
+            threshold: 0.15
+        }
+
+    );
+
+
+animatedElements.forEach((element) => {
+
+    animationObserver.observe(element);
+
+});
+```
