@@ -1,179 +1,774 @@
-```javascript
-/* =====================================================
-   WEBSITE CLB KỸ NĂNG NGUYỄN THÁI BÌNH
-   File: script.js
-===================================================== */
+<!DOCTYPE html>
+<html lang="vi">
 
+<head>
 
-/* =====================================================
-   1. HIỆU ỨNG COUNTER
-===================================================== */
+    <meta charset="UTF-8">
 
-const counters = document.querySelectorAll(".counter");
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
+    <meta name="description"
+          content="Website CLB Kỹ năng Nguyễn Thái Bình">
 
-const startCounter = (counter) => {
+    <title>CLB Kỹ năng Nguyễn Thái Bình</title>
 
-    const target =
-        Number(counter.dataset.target);
+    <link rel="stylesheet" href="style.css">
 
-    let current = 0;
+</head>
 
-    const increment =
-        Math.max(1, Math.ceil(target / 80));
 
+<body>
 
-    const updateCounter = () => {
 
-        current += increment;
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-        if (current >= target) {
+<header class="header">
 
-            counter.textContent = target;
+    <div class="container header-container">
 
-            return;
+        <a href="#home" class="logo">
 
-        }
+            <img src="images/logo.png"
+                 alt="Logo CLB">
 
-        counter.textContent = current;
+            <span>
+                CLB Kỹ năng<br>
+                Nguyễn Thái Bình
+            </span>
 
-        requestAnimationFrame(updateCounter);
+        </a>
 
-    };
 
+        <nav class="nav">
 
-    updateCounter();
+            <a href="#home">Trang chủ</a>
 
-};
+            <a href="#about">Giới thiệu</a>
 
+            <a href="#members">Ban Chủ nhiệm</a>
 
+            <a href="#activities">Hoạt động</a>
 
-/* =====================================================
-   2. KÍCH HOẠT COUNTER KHI CUỘN TỚI
-===================================================== */
+            <a href="#events">Sự kiện</a>
 
-const statsSection =
-    document.querySelector(".stats");
+            <a href="#contact">Liên hệ</a>
 
+        </nav>
 
-let counterStarted = false;
+    </div>
 
+</header>
 
-const observer =
-    new IntersectionObserver(
 
-        (entries) => {
 
-            entries.forEach((entry) => {
+<!-- =====================================================
+     HERO
+===================================================== -->
 
-                if (
-                    entry.isIntersecting &&
-                    !counterStarted
-                ) {
+<section id="home" class="hero">
 
-                    counters.forEach(startCounter);
+    <div class="container">
 
-                    counterStarted = true;
+        <div class="hero-content fade-in">
 
-                }
+            <p class="hero-subtitle">
+                CLB KỸ NĂNG NGUYỄN THÁI BÌNH
+            </p>
 
-            });
+            <h1>
+                Cùng học hỏi.<br>
+                Cùng phát triển.
+            </h1>
 
-        },
+            <p>
+                Nơi hội tụ những học sinh năng động,
+                sáng tạo và luôn sẵn sàng phát triển bản thân.
+            </p>
 
-        {
-            threshold: 0.3
-        }
 
-    );
+            <div class="hero-buttons">
 
+                <a href="#about"
+                   class="btn btn-primary">
 
-if (statsSection) {
+                    Khám phá CLB
 
-    observer.observe(statsSection);
+                </a>
 
-}
 
+                <a href="#events"
+                   class="btn btn-secondary">
 
+                    Xem hoạt động
 
-/* =====================================================
-   3. FORM LIÊN HỆ
-===================================================== */
+                </a>
 
-const contactForm =
-    document.getElementById("contactForm");
+            </div>
 
+        </div>
 
-if (contactForm) {
+    </div>
 
-    contactForm.addEventListener(
-        "submit",
-        function (event) {
+</section>
 
-            event.preventDefault();
 
 
-            const name =
-                document.getElementById("name").value;
+<!-- =====================================================
+     GIỚI THIỆU
+===================================================== -->
 
+<section id="about" class="section">
 
-            alert(
-                `Cảm ơn ${name} đã liên hệ với CLB!`
-            );
+    <div class="container">
 
+        <div class="section-title">
 
-            contactForm.reset();
+            <h2>Về chúng tôi</h2>
 
-        }
-    );
+            <p>
+                CLB Kỹ năng Nguyễn Thái Bình
+            </p>
 
-}
+        </div>
 
 
+        <div class="about">
 
-/* =====================================================
-   4. HIỆU ỨNG FADE-IN KHI CUỘN
-===================================================== */
+            <div class="about-image">
 
-const animatedElements =
-    document.querySelectorAll(
-        ".card, .member, .event, .about-content"
-    );
+                <img src="images/about.jpg"
+                     alt="Hoạt động CLB">
 
+            </div>
 
-const animationObserver =
-    new IntersectionObserver(
 
-        (entries) => {
+            <div class="about-content">
 
-            entries.forEach((entry) => {
+                <h2>
+                    Học tập – Kỹ năng – Trải nghiệm
+                </h2>
 
-                if (entry.isIntersecting) {
+                <p>
+                    CLB Kỹ năng Nguyễn Thái Bình là môi trường
+                    dành cho những học sinh mong muốn rèn luyện
+                    kỹ năng, phát triển tư duy và nâng cao khả năng
+                    làm việc tập thể.
+                </p>
 
-                    entry.target.classList.add(
-                        "fade-in"
-                    );
+                <p>
+                    Thông qua các hoạt động đào tạo, tổ chức sự kiện,
+                    hoạt động ngoại khóa và các dự án thực tế,
+                    thành viên có cơ hội phát triển toàn diện
+                    cả về chuyên môn lẫn kỹ năng mềm.
+                </p>
 
-                    animationObserver.unobserve(
-                        entry.target
-                    );
+                <a href="#activities"
+                   class="btn btn-primary">
 
-                }
+                    Tìm hiểu hoạt động
 
-            });
+                </a>
 
-        },
+            </div>
 
-        {
-            threshold: 0.15
-        }
+        </div>
 
-    );
+    </div>
 
+</section>
 
-animatedElements.forEach((element) => {
 
-    animationObserver.observe(element);
 
-});
-```
+<!-- =====================================================
+     THỐNG KÊ
+===================================================== -->
+
+<section class="stats">
+
+    <div class="container">
+
+        <div class="stats-grid">
+
+            <div class="stat">
+
+                <h3 class="counter"
+                    data-target="100">
+
+                    0
+
+                </h3>
+
+                <p>
+                    Thành viên
+                </p>
+
+            </div>
+
+
+            <div class="stat">
+
+                <h3 class="counter"
+                    data-target="20">
+
+                    0
+
+                </h3>
+
+                <p>
+                    Hoạt động
+                </p>
+
+            </div>
+
+
+            <div class="stat">
+
+                <h3 class="counter"
+                    data-target="10">
+
+                    0
+
+                </h3>
+
+                <p>
+                    Ban chuyên môn
+                </p>
+
+            </div>
+
+
+            <div class="stat">
+
+                <h3 class="counter"
+                    data-target="5">
+
+                    0
+
+                </h3>
+
+                <p>
+                    Năm phát triển
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     BAN CHỦ NHIỆM
+===================================================== -->
+
+<section id="members"
+         class="section">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Ban Chủ nhiệm</h2>
+
+            <p>
+                Những người điều hành và phát triển CLB
+            </p>
+
+        </div>
+
+
+        <div class="members">
+
+
+            <div class="member">
+
+                <img src="images/member1.jpg"
+                     alt="Chủ nhiệm">
+
+                <h3>
+                    Nguyễn Văn A
+                </h3>
+
+                <p>
+                    Chủ nhiệm
+                </p>
+
+            </div>
+
+
+
+            <div class="member">
+
+                <img src="images/member2.jpg"
+                     alt="Phó Chủ nhiệm">
+
+                <h3>
+                    Nguyễn Văn B
+                </h3>
+
+                <p>
+                    Phó Chủ nhiệm
+                </p>
+
+            </div>
+
+
+
+            <div class="member">
+
+                <img src="images/member3.jpg"
+                     alt="Thư ký">
+
+                <h3>
+                    Nguyễn Văn C
+                </h3>
+
+                <p>
+                    Thư ký
+
+                </p>
+
+            </div>
+
+
+
+            <div class="member">
+
+                <img src="images/member1.jpg"
+                     alt="Trưởng ban">
+
+                <h3>
+                    Nguyễn Văn D
+                </h3>
+
+                <p>
+                    Trưởng ban
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     HOẠT ĐỘNG
+===================================================== -->
+
+<section id="activities"
+         class="section section-gray">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Hoạt động của CLB</h2>
+
+            <p>
+                Những hoạt động nổi bật
+            </p>
+
+        </div>
+
+
+        <div class="grid">
+
+
+            <article class="card">
+
+                <img src="images/event1.jpg"
+                     alt="Đào tạo kỹ năng">
+
+                <div class="card-content">
+
+                    <h3>
+                        Đào tạo kỹ năng
+                    </h3>
+
+                    <p>
+                        Các chương trình đào tạo kỹ năng
+                        giao tiếp, lãnh đạo, tổ chức sự kiện,
+                        làm việc nhóm và phát triển bản thân.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card">
+
+                <img src="images/event1.jpg"
+                     alt="Tổ chức sự kiện">
+
+                <div class="card-content">
+
+                    <h3>
+                        Tổ chức sự kiện
+                    </h3>
+
+                    <p>
+                        Thành viên được trực tiếp tham gia
+                        xây dựng và vận hành các chương trình
+                        dành cho học sinh.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="card">
+
+                <img src="images/event1.jpg"
+                     alt="Hoạt động tập thể">
+
+                <div class="card-content">
+
+                    <h3>
+                        Hoạt động tập thể
+                    </h3>
+
+                    <p>
+                        Tăng cường tinh thần đoàn kết,
+                        giao lưu và xây dựng văn hóa CLB.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SỰ KIỆN
+===================================================== -->
+
+<section id="events"
+         class="section">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Sự kiện sắp tới</h2>
+
+            <p>
+                Cập nhật những chương trình mới nhất
+            </p>
+
+        </div>
+
+
+        <div class="event-list">
+
+
+            <div class="event">
+
+                <div class="event-date">
+
+                    <strong>26</strong>
+
+                    <span>08/2026</span>
+
+                </div>
+
+
+                <div class="event-info">
+
+                    <h3>
+                        Chương trình Chào đón
+                        Tân học sinh Khóa 26
+                    </h3>
+
+                    <p>
+                        Chương trình giao lưu,
+                        kết nối và chào đón
+                        học sinh khóa mới.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="event">
+
+                <div class="event-date">
+
+                    <strong>15</strong>
+
+                    <span>09/2026</span>
+
+                </div>
+
+
+                <div class="event-info">
+
+                    <h3>
+                        Workshop Kỹ năng lãnh đạo
+                    </h3>
+
+                    <p>
+                        Chương trình đào tạo kỹ năng
+                        lãnh đạo và quản lý đội nhóm.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="event">
+
+                <div class="event-date">
+
+                    <strong>10</strong>
+
+                    <span>10/2026</span>
+
+                </div>
+
+
+                <div class="event-info">
+
+                    <h3>
+                        Hoạt động gắn kết thành viên
+                    </h3>
+
+                    <p>
+                        Hoạt động team building
+                        dành cho thành viên CLB.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     LIÊN HỆ
+===================================================== -->
+
+<section id="contact"
+         class="section section-gray">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Liên hệ</h2>
+
+            <p>
+                Kết nối với CLB Kỹ năng Nguyễn Thái Bình
+            </p>
+
+        </div>
+
+
+        <form class="contact-form"
+              id="contactForm">
+
+
+            <div class="form-group">
+
+                <label for="name">
+                    Họ và tên
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Nhập họ và tên"
+                    required
+                >
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Nhập email"
+                    required
+                >
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="message">
+                    Nội dung
+                </label>
+
+                <textarea
+                    id="message"
+                    placeholder="Nhập nội dung..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+
+            <button
+                type="submit"
+                class="btn btn-primary">
+
+                Gửi liên hệ
+
+            </button>
+
+
+        </form>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+
+            <div>
+
+                <h3>
+                    CLB Kỹ năng Nguyễn Thái Bình
+                </h3>
+
+                <p>
+                    Cùng học hỏi – Cùng phát triển –
+                    Cùng tạo nên những giá trị tích cực
+                    cho cộng đồng học sinh.
+                </p>
+
+            </div>
+
+
+
+            <div>
+
+                <h3>
+                    Liên kết
+                </h3>
+
+                <div class="footer-links">
+
+                    <a href="#home">
+                        Trang chủ
+                    </a>
+
+                    <a href="#about">
+                        Giới thiệu
+                    </a>
+
+                    <a href="#activities">
+                        Hoạt động
+                    </a>
+
+                    <a href="#events">
+                        Sự kiện
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <div>
+
+                <h3>
+                    Kết nối
+                </h3>
+
+                <div class="footer-links">
+
+                    <a href="#">
+                        Facebook
+                    </a>
+
+                    <a href="#">
+                        Instagram
+                    </a>
+
+                    <a href="#">
+                        Email
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="footer-bottom">
+
+            © 2026 CLB Kỹ năng Nguyễn Thái Bình.
+            All Rights Reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
